@@ -4,6 +4,21 @@ import SearchBox from "./components/search-box/search-box.component";
 import "./App.css";
 import { Component } from "react";
 
+
+const App () => {
+  return(
+    <div className="App">
+        <h1 className="app-title">Database</h1>
+        <SearchBox
+          onChangeHandler={onSearchChange}
+          placeHolder="search monters"
+          className="monster-search-box"
+        />
+        <CardList monsters={filteredMonsters} />
+    </div>
+  )
+}
+
 class App extends Component {
   constructor() {
     super();
@@ -40,15 +55,7 @@ class App extends Component {
     });
 
     return (
-      <div className="App">
-        <h1 className="app-title">Database</h1>
-        <SearchBox
-          onChangeHandler={onSearchChange}
-          placeHolder="search monters"
-          className="monster-search-box"
-        />
-        <CardList monsters={filteredMonsters} />
-      </div>
+      
     );
   }
 }
