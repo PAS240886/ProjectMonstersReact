@@ -1,25 +1,36 @@
 import logo from "./logo.svg";
+import { useState, useEffect } from "react";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 import "./App.css";
-import { Component } from "react";
 
+const App = () => {
+  const [searchField, setSearchField] = useState("");
+  const [monsters, setMonsters] = useState([]);
 
-const App () => {
-  return(
+  const onSearchChange = (event) => {
+    const searchFieldString = event.target.value.toLocaleLowerCase();
+    setSearchField(searchFieldString);
+  };
+
+  const filteredMonsters = monsters.filter((monster) => {
+    return monster.name.toLocaleLowerCase().includes(searchField);
+  });
+
+  return (
     <div className="App">
-        <h1 className="app-title">Database</h1>
-        <SearchBox
-          onChangeHandler={onSearchChange}
-          placeHolder="search monters"
-          className="monster-search-box"
-        />
-        <CardList monsters={filteredMonsters} />
+      <h1 className="app-title">Database</h1>
+      <SearchBox
+        onChangeHandler={onSearchChange}
+        placeHolder="search monters"
+        className="monster-search-box"
+      />
+      <CardList monsters={filteredMonsters} />
     </div>
-  )
-}
+  );
+};
 
-class App extends Component {
+/* class App extends Component {
   constructor() {
     super();
 
@@ -39,25 +50,17 @@ class App extends Component {
       );
   }
 
-  onSearchChange = (event) => {
-    const searchField = event.target.value.toLocaleLowerCase();
-    this.setState(() => {
-      return { searchField };
-    });
-  };
-
   render() {
     const { monsters, searchField } = this.state;
     const { onSearchChange } = this;
 
-    const filteredMonsters = monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(searchField);
-    });
+
 
     return (
       
     );
   }
 }
+*/
 
 export default App;
